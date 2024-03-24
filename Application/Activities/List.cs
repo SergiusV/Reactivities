@@ -22,20 +22,20 @@ namespace Application.Activities
 
             public async Task<List<Activity>> Handle(Qwery request, CancellationToken cancellationToken)
             {
-                try
-                {
-                    for (var i = 0; i < 2; i++)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        await Task.Delay(1000, cancellationToken);
-                        _logger.LogInformation($"Task {i} has coplited");
-                    }
-                }
-                catch (System.Exception)
-                {
+                // try
+                // {
+                //     for (var i = 0; i < 2; i++)
+                //     {
+                //         cancellationToken.ThrowIfCancellationRequested();
+                //         await Task.Delay(1000, cancellationToken);
+                //         _logger.LogInformation($"Task {i} has coplited");
+                //     }
+                // }
+                // catch (System.Exception)
+                // {
                     
-                    _logger.LogInformation("Task Was cancelled");
-                }
+                //     _logger.LogInformation("Task Was cancelled");
+                // }
 
                 return await _cocntext.Activities.ToListAsync();
             }
