@@ -22,6 +22,7 @@ namespace Application.Activities
 
             public async Task Handle(Command request, CancellationToken cancellationToken)
             {
+                
                 _context.Add(request.Activity);
 
                 await _context.SaveChangesAsync();
