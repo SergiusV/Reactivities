@@ -18,6 +18,12 @@ COPY Domain/ ./Domain/
 COPY Application/ ./Application/
 COPY Persistence/ ./Persistence/
 
+# Указание переменных среды
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# Указание порта
+EXPOSE 5000
+
 # Собираем и публикуем API проект
 WORKDIR /app/API
 RUN dotnet publish -c Release -o out
