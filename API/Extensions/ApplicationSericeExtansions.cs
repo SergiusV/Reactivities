@@ -2,6 +2,7 @@ using Application.Activities;
 using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using dotenv.net;
 
 
 namespace API.Extensions
@@ -13,8 +14,9 @@ namespace API.Extensions
            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            //string connectionString = $"User ID={config["POSTGRES_USER"]};Password={config["POSTGRES_PASSWORD"]};Host={config["POSTGRES_HOST"]};Port={config["POSTGRES_PORT"]};Database={config["POSTGRES_DB"]};Pooling=true;";
-         // Получаем строку подключения из переменной среды
+            
+            // Получаем строку подключения из переменной среды
+            DotEnv.Load();
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
 
@@ -22,10 +24,6 @@ namespace API.Extensions
                 Console.Write(connectionString);
                 //Console.Write(config.GetConnectionString("DefaultConnection"));
                 opt.UseNpgsql(connectionString ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
-
-
-                //opt.UseNpgsql(connectionString  ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
-                //opt.UseNpgsql(config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
             });
 
             services.AddCors(opt => {
