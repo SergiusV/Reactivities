@@ -14,11 +14,18 @@ namespace API.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             //string connectionString = $"User ID={config["POSTGRES_USER"]};Password={config["POSTGRES_PASSWORD"]};Host={config["POSTGRES_HOST"]};Port={config["POSTGRES_PORT"]};Database={config["POSTGRES_DB"]};Pooling=true;";
+         // Получаем строку подключения из переменной среды
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
 
             services.AddDbContext<DataContext>(opt => { 
-                Console.Write(config.GetConnectionString("DefaultConnection"));
+                Console.Write(connectionString);
+                //Console.Write(config.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(connectionString ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
+
+
                 //opt.UseNpgsql(connectionString  ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
-                opt.UseNpgsql(config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
+                //opt.UseNpgsql(config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'WebApiContext' not found."));
             });
 
             services.AddCors(opt => {
