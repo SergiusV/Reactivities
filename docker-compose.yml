@@ -23,7 +23,3 @@ services:
       - pgdata_reactivities:/var/lib/postgresql/data
 volumes:
   pgdata_reactivities:
-
-  
-      
-

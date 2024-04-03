@@ -7,7 +7,9 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+// axios.defaults.baseURL = 'http://localhost:5000/api';
+//axios.defaults.baseURL = 'http://localhost:8000/api';
 
 axios.interceptors.response.use(async responce => {
     try {

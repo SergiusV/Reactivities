@@ -2,22 +2,21 @@ version: '3'
 
 services:
   backend:
-    build: .
     image: ghcr.io/sergiusv/reactivities-image:latest
     restart: always
     ports:
       - "8000:8080"
     env_file:
-      - ./.env
+      - ../.env
     depends_on:
-      - pg    
+      - pg
   pg:
     image: postgres:15
     restart: always
     ports:
       - "5431:5432"
     env_file:
-      - ./.env
+      - ../.env
     volumes:
       - pgdata_reactivities:/var/lib/postgresql/data
 volumes:

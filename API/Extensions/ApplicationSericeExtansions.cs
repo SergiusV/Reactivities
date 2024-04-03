@@ -18,6 +18,7 @@ namespace API.Extensions
             // Получаем строку подключения из переменной среды
             DotEnv.Load();
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            //connectionString = "User ID=postgres;Password=12345678;Host=pg;Port=5432;Database=dbreactivities;";
 
 
             services.AddDbContext<DataContext>(opt => { 
@@ -29,7 +30,7 @@ namespace API.Extensions
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(Environment.GetEnvironmentVariable("FRONTEND_URL"));
                 });
             });
 
