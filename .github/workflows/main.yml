@@ -41,6 +41,7 @@ jobs:
   build-frontend:
     name: 'Build frontend and publish'
     runs-on: ubuntu-latest
+    needs: build-backend
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
@@ -87,7 +88,7 @@ jobs:
             ghcr.io/${{ steps.owner_to_lower_case_owner.outputs.lowercase }}/reactivitiesfront-image:latest
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
