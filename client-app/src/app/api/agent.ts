@@ -13,7 +13,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 axios.interceptors.response.use(async responce => {
     try {
-        await sleep(1000);
+        //await sleep(1000);
         return responce;
     } catch (error) {
         console.log(error);
